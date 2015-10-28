@@ -11,7 +11,7 @@ void setup()
 		//stuff[1] = new JumboParticle();
 		//stuff[i] =  new NormalParticle();
 		if(i % 105 == 0){ stuff[i] = new OddballParticle(); }
-		if(i % 100 == 0){ stuff[i] = new JumboParticle(); }
+		else if(i % 100 == 0){ stuff[i] = new JumboParticle(); }
 		else{ stuff[i] = new NormalParticle(); }
 	}
 }
@@ -84,7 +84,7 @@ class OddballParticle implements Particle //uses an interface
 		yPos = 250;
 		angle = Math.random()*(2*Math.PI);
 		speed = Math.random()*20; 
-		size = 50;
+		size = 5;
 		colores = color(255, 0, 0);
 	}
 	public void move()
