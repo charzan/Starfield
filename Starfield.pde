@@ -7,7 +7,7 @@ void setup()
 	stuff = new NormalParticle[1000];
 	for(int i = 0; i < stuff.length; i++)
 	{
-		stuff[i] =  new NormalParticle;
+		stuff[i] =  new NormalParticle();
 	}
 }
 void draw()
@@ -16,47 +16,49 @@ void draw()
 	background(0, 0, 0);
 	for(int i = 0; i < stuff.length; i++)
 	{
-		
+		stuff[i].move();
+		stuff[i].show();
 	}
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
 	//your code here
 	double xPos;
 	double yPos;
 	double speed;
 	double angle;
+	double size;
+	int colores;
 
 	NormalParticle()
 	{
-		xPos = (Math.random()*5);
-		yPos = (Math.random()*5);
-		angle = Math.random()*2*Math.PI;
-		speed = Math.random()*8; 
+		xPos = 250;
+		yPos = 250;
+		angle = Math.random()*(2*Math.PI);
+		speed = Math.random()*20; 
+		size = Math.random()*7;
+		colores = color(255, 255, 0);
+	}
+	public void move()
+	{
+		xPos += speed * Math.cos(angle);
+		yPos += speed * Math.sin(angle);
 
-		
+	}
 
+	public void show()
+	{
+		ellipse((float)xPos, (float)yPos, (float)size, (float)size);
 	}
 
 }
 interface Particle 
 {
 	//your code here
-	void move()
-	{
-		//angle += Math.cos(angle);
-		yPos += Math.cos(angle) * speed;
-		xPos += Math.sin(angle) * speed;
-	}
-	void show()
-	{
-		fill(255);
-		ellpise(xPos, yPos, 7, 7);
-	}
-
-
+	public void show();
+	public void move();
 }
-class OddballParticle //uses an interface
+class OddballParticle  //uses an interface
 {
 	//your code here
 }
