@@ -7,9 +7,12 @@ void setup()
 	stuff = new Particle[1000];
 	for(int i = 0; i < stuff.length; i++)
 	{
-		stuff[0] = new OddballParticle();
-		stuff[1] = new JumboParticle();
-		stuff[i] =  new NormalParticle();
+		//stuff[0] = new OddballParticle();
+		//stuff[1] = new JumboParticle();
+		//stuff[i] =  new NormalParticle();
+		if(i % 105 == 0){ stuff[i] = new OddballParticle(); }
+		if(i % 100 == 0){ stuff[i] = new JumboParticle(); }
+		else{ stuff[i] = new NormalParticle(); }
 	}
 }
 void draw()
@@ -37,14 +40,18 @@ class NormalParticle implements Particle
 		xPos = 250;
 		yPos = 250;
 		angle = Math.random()*(2*Math.PI);
-		speed = Math.random()*20; 
+		speed = Math.random()*20+0.4; 
 		size = Math.random()*7;
-		colores = color(0, 0, 255);
+		colores = color(0, (int)(Math.random()*150),(int)(Math.random()*255 + 100));
 	}
 	public void move()
 	{
 		xPos += speed * Math.cos(angle);
 		yPos += speed * Math.sin(angle);
+		if(xPos < 0 || xPos > 500  || yPos < 0 || yPos > 500)
+		{
+			speed = speed * -1;
+		}
 
 	}
 
@@ -77,17 +84,22 @@ class OddballParticle implements Particle //uses an interface
 		yPos = 250;
 		angle = Math.random()*(2*Math.PI);
 		speed = Math.random()*20; 
-		size = Math.random()*15;
+		size = 50;
 		colores = color(255, 0, 0);
 	}
 	public void move()
 	{
+
 		xPos += speed * Math.cos(angle);
 		yPos += speed * Math.sin(angle);
+		if(xPos < 0 || xPos > 500  || yPos < 0 || yPos > 500)
+		{
+			speed = speed * -1;
+		}
 	}
 	public void show()
 	{
-		fill(colores);
+		fill(255, 0, 0);
 		rect((float)xPos, (float)yPos, (float)size+5, (float)size+5);
 	}
 
